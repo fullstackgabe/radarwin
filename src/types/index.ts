@@ -27,9 +27,6 @@ export type EventType = {
   nivel: Nivel
   o_que_e: string
   impacto_texto: string
-  hist_trades: number | null
-  hist_acerto: number | null
-  hist_media: number | null
   ordem: number
 }
 

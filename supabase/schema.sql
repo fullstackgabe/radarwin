@@ -47,11 +47,9 @@ create table if not exists public.event_types (
   nivel text not null check (nivel in ('normal', 'atencao', 'forte')),
   o_que_e text not null,
   impacto_texto text not null,
-  hist_trades int,
-  hist_acerto numeric,
-  hist_media numeric,
   ordem int not null default 99
 );
+alter table public.event_types drop column if exists hist_trades, drop column if exists hist_acerto, drop column if exists hist_media;
 alter table public.event_types enable row level security;
 drop policy if exists "tipos visiveis para assinantes" on public.event_types;
 create policy "tipos visiveis para assinantes" on public.event_types
@@ -109,20 +107,19 @@ create table if not exists public.sync_log (
 );
 alter table public.sync_log enable row level security;
 
-insert into public.event_types (code, nome, pais, fonte, fonte_url, horario_texto, nivel, o_que_e, impacto_texto, hist_trades, hist_acerto, hist_media, ordem) values
-('super_quarta', 'Super quarta', 'BR + EUA', 'Banco Central e Federal Reserve', 'https://www.bcb.gov.br/controleinflacao/calendarioreunioescopom', 'Fed às 15h/16h · Copom após o fechamento', 'forte', 'Dia em que o Copom e o Fed (FOMC) decidem os juros no mesmo dia.', 'No histórico o OPENING acerta só ~30–40% nesses dias: o mercado fica esperando as decisões e o movimento do 1º candle não continua. Considere não operar.', 20, 30.0, -50.4, 1),
-('fomc', 'Decisão de juros nos EUA (FOMC)', 'EUA', 'Federal Reserve', 'https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm', '15h (16h no inverno americano)', 'atencao', 'O banco central americano anuncia a taxa de juros dos EUA.', 'Dia mais fraco para o OPENING (~36–41% de acerto): o 1º candle costuma não continuar enquanto o mercado espera a decisão. Opere com cautela.', 28, 35.7, -36.0, 2),
-('copom', 'Decisão de juros no Brasil (Copom)', 'BR', 'Banco Central do Brasil', 'https://www.bcb.gov.br/controleinflacao/calendarioreunioescopom', 'Após o fechamento (~18h30)', 'atencao', 'O Banco Central anuncia a taxa Selic.', 'A decisão sai depois do fechamento, mas o dia costuma ser de espera: OPENING ~33% de acerto quando o Copom é sozinho. Opere com cautela. A abertura do dia seguinte é normal.', 6, 33.3, -46.8, 3),
-('ipca', 'IPCA', 'BR', 'IBGE', 'https://www.ibge.gov.br/explica/inflacao.php', '9h', 'normal', 'Inflação oficial do Brasil no mês.', 'Sai junto com o 1º candle. No histórico não muda o OPENING (~55% de acerto). Opere normal.', 40, 55.0, 13.8, 4),
-('ipca15', 'IPCA-15', 'BR', 'IBGE', 'https://www.ibge.gov.br/explica/inflacao.php', '9h', 'normal', 'Prévia da inflação oficial do Brasil.', 'Sai junto com o 1º candle. No histórico não muda o OPENING (~56% de acerto). Opere normal.', 32, 56.2, 20.6, 5),
-('payroll', 'Payroll (emprego nos EUA)', 'EUA', 'BLS', 'https://www.bls.gov/schedule/news_release/empsit.htm', '9h30 (10h30 no inverno americano)', 'normal', 'Relatório de emprego dos EUA, um dos dados que mais mexem nos mercados.', 'Sai com o trade já aberto. No histórico não muda o OPENING (~54% de acerto), mas espere volatilidade forte na hora.', 26, 53.8, 10.6, 6),
-('cpi', 'CPI (inflação nos EUA)', 'EUA', 'BLS', 'https://www.bls.gov/schedule/news_release/cpi.htm', '9h30 (10h30 no inverno americano)', 'normal', 'Inflação ao consumidor dos EUA.', 'Sai com o trade já aberto. No histórico não muda o OPENING (~53% de acerto), mas espere volatilidade forte na hora.', 34, 52.9, 7.9, 7),
-('pos_fomc', 'Dia seguinte ao FOMC', 'EUA', 'Federal Reserve', 'https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm', 'Dia todo', 'normal', 'Primeiro pregão depois da decisão de juros americana.', 'Dia bom no histórico: OPENING ~61–63% de acerto. Opere normal.', 23, 60.9, 30.3, 8)
+insert into public.event_types (code, nome, pais, fonte, fonte_url, horario_texto, nivel, o_que_e, impacto_texto, ordem) values
+('super_quarta', 'Super quarta', 'BR + EUA', 'Banco Central e Federal Reserve', 'https://www.bcb.gov.br/controleinflacao/calendarioreunioescopom', 'Fed às 15h/16h · Copom após o fechamento', 'forte', 'Dia em que o Copom e o Fed (FOMC) decidem os juros no mesmo dia.', 'Copom e Fed decidem os juros no mesmo dia. O mercado passa a manhã esperando as decisões e o movimento do 1º candle costuma não continuar. É o dia mais arriscado para operar a abertura: considere ficar de fora.', 1),
+('fomc', 'Decisão de juros nos EUA (FOMC)', 'EUA', 'Federal Reserve', 'https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm', '15h (16h no inverno americano)', 'atencao', 'O banco central americano anuncia a taxa de juros dos EUA.', 'A decisão sai à tarde, mas o mercado fica em compasso de espera desde cedo e o movimento do 1º candle costuma não continuar. Opere a abertura com cautela.', 2),
+('copom', 'Decisão de juros no Brasil (Copom)', 'BR', 'Banco Central do Brasil', 'https://www.bcb.gov.br/controleinflacao/calendarioreunioescopom', 'Após o fechamento (~18h30)', 'atencao', 'O Banco Central anuncia a taxa Selic.', 'A decisão sai depois do fechamento, mas o dia costuma ser de espera e a abertura perde força. Opere com cautela. A abertura do dia seguinte é normal.', 3),
+('ipca', 'IPCA', 'BR', 'IBGE', 'https://www.ibge.gov.br/explica/inflacao.php', '9h', 'normal', 'Inflação oficial do Brasil no mês.', 'Sai às 9h, junto com o 1º candle: o candle de abertura pode vir maior que o normal, mas a notícia não costuma atrapalhar a abertura. Opere normal.', 4),
+('ipca15', 'IPCA-15', 'BR', 'IBGE', 'https://www.ibge.gov.br/explica/inflacao.php', '9h', 'normal', 'Prévia da inflação oficial do Brasil.', 'Sai às 9h, junto com o 1º candle: o candle de abertura pode vir maior que o normal, mas a notícia não costuma atrapalhar a abertura. Opere normal.', 5),
+('payroll', 'Payroll (emprego nos EUA)', 'EUA', 'BLS', 'https://www.bls.gov/schedule/news_release/empsit.htm', '9h30 (10h30 no inverno americano)', 'normal', 'Relatório de emprego dos EUA, um dos dados que mais mexem nos mercados.', 'Sai com a abertura já em andamento. Não costuma atrapalhar a abertura, mas espere volatilidade forte na hora da divulgação.', 6),
+('cpi', 'CPI (inflação nos EUA)', 'EUA', 'BLS', 'https://www.bls.gov/schedule/news_release/cpi.htm', '9h30 (10h30 no inverno americano)', 'normal', 'Inflação ao consumidor dos EUA.', 'Sai com a abertura já em andamento. Não costuma atrapalhar a abertura, mas espere volatilidade forte na hora da divulgação.', 7),
+('pos_fomc', 'Dia seguinte ao FOMC', 'EUA', 'Federal Reserve', 'https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm', 'Dia todo', 'normal', 'Primeiro pregão depois da decisão de juros americana.', 'Primeiro pregão depois da decisão americana: a abertura costuma voltar a andar normalmente. Opere normal.', 8)
 on conflict (code) do update set
   nome = excluded.nome, pais = excluded.pais, fonte = excluded.fonte, fonte_url = excluded.fonte_url,
   horario_texto = excluded.horario_texto, nivel = excluded.nivel, o_que_e = excluded.o_que_e,
-  impacto_texto = excluded.impacto_texto, hist_trades = excluded.hist_trades, hist_acerto = excluded.hist_acerto,
-  hist_media = excluded.hist_media, ordem = excluded.ordem;
+  impacto_texto = excluded.impacto_texto, ordem = excluded.ordem;
 
 insert into public.datas_oficiais (code, data, hora_local, fuso) values
 ('copom', '2026-11-04', '18:30', 'America/Sao_Paulo'), ('copom', '2026-12-09', '18:30', 'America/Sao_Paulo'),

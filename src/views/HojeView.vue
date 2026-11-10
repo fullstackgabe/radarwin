@@ -38,7 +38,6 @@ const tom: Record<string, string> = {
         <p class="text-[13px] font-semibold opacity-85">{{ rotuloDia(dia.data) }} · {{ dataLonga(dia.data) }}</p>
         <p class="mt-1 text-[26px] font-extrabold leading-tight">{{ NIVEL_EMOJI[dia.nivel] }} {{ NIVEL_LABEL[dia.nivel] }}</p>
         <p class="mt-2 text-[14.5px] leading-snug opacity-95">{{ NIVEL_FRASE[dia.nivel] }}</p>
-        <p class="mt-3 text-[12px] font-semibold opacity-75">Abertura do OPENING: 1º candle de 5 min, sinal às 9h05.</p>
       </section>
 
       <h2 class="mb-2 mt-5 px-1 text-[13px] font-extrabold uppercase tracking-wide text-muted">Notícias do dia</h2>
@@ -50,8 +49,7 @@ const tom: Record<string, string> = {
       </p>
 
       <p class="mt-6 px-2 text-center text-[11.5px] leading-snug text-faint">
-        Horários de Brasília. Fontes oficiais: IBGE, Banco Central, BLS e Federal Reserve. Estatísticas do OPENING em backtest
-        2022–2026, não são garantia.
+        Horários de Brasília. Fontes oficiais: IBGE, Banco Central, BLS e Federal Reserve.
       </p>
     </template>
   </div>

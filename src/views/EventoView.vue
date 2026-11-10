@@ -19,8 +19,6 @@ const tipo = computed(() => radar.tipoPorCode.get(code.value) ?? null)
 const hoje = hojeBRT()
 const proximas = computed(() => datas.value.filter((d) => d.data >= hoje).sort((a, b) => a.data.localeCompare(b.data)).slice(0, 6))
 
-const brl = (v: number) => `${v < 0 ? '−' : '+'}R$ ${Math.abs(v).toFixed(2).replace('.', ',')}`
-
 async function carregar() {
   carregando.value = true
   try {
@@ -56,27 +54,8 @@ watch(code, carregar)
       </section>
 
       <section class="card">
-        <h3 class="card-title">O que muda na nossa abertura</h3>
+        <h3 class="card-title">O que muda na abertura</h3>
         <p class="text-[15px] leading-snug text-ink">{{ tipo.impacto_texto }}</p>
-        <div v-if="tipo.hist_trades" class="mt-4 grid grid-cols-3 gap-2 text-center">
-          <div class="rounded-[12px] bg-line-soft px-2 py-2.5">
-            <p class="text-[18px] font-extrabold text-ink">{{ tipo.hist_trades }}</p>
-            <p class="text-[11px] font-semibold text-muted">dias no histórico</p>
-          </div>
-          <div class="rounded-[12px] bg-line-soft px-2 py-2.5">
-            <p class="text-[18px] font-extrabold text-ink">{{ tipo.hist_acerto?.toFixed(0) }}%</p>
-            <p class="text-[11px] font-semibold text-muted">acerto do OPENING</p>
-          </div>
-          <div class="rounded-[12px] bg-line-soft px-2 py-2.5">
-            <p class="text-[16px] font-extrabold" :class="(tipo.hist_media ?? 0) < 0 ? 'text-danger' : 'text-success'">
-              {{ brl(tipo.hist_media ?? 0) }}
-            </p>
-            <p class="text-[11px] font-semibold text-muted">média por trade</p>
-          </div>
-        </div>
-        <p class="mt-3 text-[11.5px] leading-snug text-faint">
-          OPENING 5 min, corpo 40, 1 contrato, 2022–2026 (dias normais: ~55% de acerto). Amostra pequena: use como alerta, não como regra.
-        </p>
       </section>
 
       <section class="card">

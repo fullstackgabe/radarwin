@@ -10,10 +10,7 @@ export const CATALOGO: EventType[] = [
     horario_texto: 'Fed às 15h/16h · Copom após o fechamento',
     nivel: 'forte',
     o_que_e: 'Dia em que o Copom e o Fed (FOMC) decidem os juros no mesmo dia.',
-    impacto_texto: 'No histórico o OPENING acerta só ~30–40% nesses dias: o mercado fica esperando as decisões e o movimento do 1º candle não continua. Considere não operar.',
-    hist_trades: 20,
-    hist_acerto: 30.0,
-    hist_media: -50.4,
+    impacto_texto: 'Copom e Fed decidem os juros no mesmo dia. O mercado passa a manhã esperando as decisões e o movimento do 1º candle costuma não continuar. É o dia mais arriscado para operar a abertura: considere ficar de fora.',
     ordem: 1,
   },
   {
@@ -25,10 +22,7 @@ export const CATALOGO: EventType[] = [
     horario_texto: '15h (16h no inverno americano)',
     nivel: 'atencao',
     o_que_e: 'O banco central americano anuncia a taxa de juros dos EUA.',
-    impacto_texto: 'Dia mais fraco para o OPENING (~36–41% de acerto): o 1º candle costuma não continuar enquanto o mercado espera a decisão. Opere com cautela.',
-    hist_trades: 28,
-    hist_acerto: 35.7,
-    hist_media: -36.0,
+    impacto_texto: 'A decisão sai à tarde, mas o mercado fica em compasso de espera desde cedo e o movimento do 1º candle costuma não continuar. Opere a abertura com cautela.',
     ordem: 2,
   },
   {
@@ -40,10 +34,7 @@ export const CATALOGO: EventType[] = [
     horario_texto: 'Após o fechamento (~18h30)',
     nivel: 'atencao',
     o_que_e: 'O Banco Central anuncia a taxa Selic.',
-    impacto_texto: 'A decisão sai depois do fechamento, mas o dia costuma ser de espera: OPENING ~33% de acerto quando o Copom é sozinho. Opere com cautela. A abertura do dia seguinte é normal.',
-    hist_trades: 6,
-    hist_acerto: 33.3,
-    hist_media: -46.8,
+    impacto_texto: 'A decisão sai depois do fechamento, mas o dia costuma ser de espera e a abertura perde força. Opere com cautela. A abertura do dia seguinte é normal.',
     ordem: 3,
   },
   {
@@ -55,10 +46,7 @@ export const CATALOGO: EventType[] = [
     horario_texto: '9h',
     nivel: 'normal',
     o_que_e: 'Inflação oficial do Brasil no mês.',
-    impacto_texto: 'Sai junto com o 1º candle. No histórico não muda o OPENING (~55% de acerto). Opere normal.',
-    hist_trades: 40,
-    hist_acerto: 55.0,
-    hist_media: 13.8,
+    impacto_texto: 'Sai às 9h, junto com o 1º candle: o candle de abertura pode vir maior que o normal, mas a notícia não costuma atrapalhar a abertura. Opere normal.',
     ordem: 4,
   },
   {
@@ -70,10 +58,7 @@ export const CATALOGO: EventType[] = [
     horario_texto: '9h',
     nivel: 'normal',
     o_que_e: 'Prévia da inflação oficial do Brasil.',
-    impacto_texto: 'Sai junto com o 1º candle. No histórico não muda o OPENING (~56% de acerto). Opere normal.',
-    hist_trades: 32,
-    hist_acerto: 56.2,
-    hist_media: 20.6,
+    impacto_texto: 'Sai às 9h, junto com o 1º candle: o candle de abertura pode vir maior que o normal, mas a notícia não costuma atrapalhar a abertura. Opere normal.',
     ordem: 5,
   },
   {
@@ -85,10 +70,7 @@ export const CATALOGO: EventType[] = [
     horario_texto: '9h30 (10h30 no inverno americano)',
     nivel: 'normal',
     o_que_e: 'Relatório de emprego dos EUA, um dos dados que mais mexem nos mercados.',
-    impacto_texto: 'Sai com o trade já aberto. No histórico não muda o OPENING (~54% de acerto), mas espere volatilidade forte na hora.',
-    hist_trades: 26,
-    hist_acerto: 53.8,
-    hist_media: 10.6,
+    impacto_texto: 'Sai com a abertura já em andamento. Não costuma atrapalhar a abertura, mas espere volatilidade forte na hora da divulgação.',
     ordem: 6,
   },
   {
@@ -100,10 +82,7 @@ export const CATALOGO: EventType[] = [
     horario_texto: '9h30 (10h30 no inverno americano)',
     nivel: 'normal',
     o_que_e: 'Inflação ao consumidor dos EUA.',
-    impacto_texto: 'Sai com o trade já aberto. No histórico não muda o OPENING (~53% de acerto), mas espere volatilidade forte na hora.',
-    hist_trades: 34,
-    hist_acerto: 52.9,
-    hist_media: 7.9,
+    impacto_texto: 'Sai com a abertura já em andamento. Não costuma atrapalhar a abertura, mas espere volatilidade forte na hora da divulgação.',
     ordem: 7,
   },
   {
@@ -115,10 +94,7 @@ export const CATALOGO: EventType[] = [
     horario_texto: 'Dia todo',
     nivel: 'normal',
     o_que_e: 'Primeiro pregão depois da decisão de juros americana.',
-    impacto_texto: 'Dia bom no histórico: OPENING ~61–63% de acerto. Opere normal.',
-    hist_trades: 23,
-    hist_acerto: 60.9,
-    hist_media: 30.3,
+    impacto_texto: 'Primeiro pregão depois da decisão americana: a abertura costuma voltar a andar normalmente. Opere normal.',
     ordem: 8,
   },
 ]
@@ -135,8 +111,8 @@ export const NIVEL_EMOJI: Record<Nivel, string> = { normal: '✅', atencao: '�
 
 export const NIVEL_FRASE: Record<Nivel, string> = {
   normal: 'Nada no calendário que atrapalhe a abertura. Opere normal.',
-  atencao: 'Dia de decisão de juros: o OPENING costuma render menos. Opere com cautela.',
-  forte: 'Super quarta: no histórico o OPENING acerta ~30–40%. Considere não operar.',
+  atencao: 'Dia de decisão de juros: a abertura costuma perder força. Opere com cautela.',
+  forte: 'Super quarta: o dia mais arriscado para operar a abertura. Considere não operar.',
 }
 
 export function maiorNivel(niveis: Nivel[]): Nivel {

@@ -11,8 +11,8 @@ export function nivelDoDia(eventos: Evento[]): string {
 
 const CABECALHO: Record<string, string> = {
   normal: '✅ *Dia normal para a abertura.*',
-  atencao: '🟡 *Atenção:* dia de decisão de juros, o OPENING costuma render menos. Opere com cautela.',
-  forte: '🔴 *Super quarta* (Copom + FOMC hoje)\nNo histórico o OPENING acerta ~30–40% nesses dias. Considere não operar.',
+  atencao: '🟡 *Atenção:* dia de decisão de juros, a abertura costuma perder força. Opere com cautela.',
+  forte: '🔴 *Super quarta* (Copom + FOMC hoje)\nO dia mais arriscado para operar a abertura. Considere não operar.',
 }
 
 export function textoAgenda(data: string, eventos: Evento[], tipos: Map<string, Tipo>, link: string): string {
