@@ -1,0 +1,28 @@
+<script setup lang="ts">
+import { ChevronRight } from '@lucide/vue'
+import { useRouter } from 'vue-router'
+import { horaCurta } from '@/lib/dias'
+import type { RadarItem } from '@/types'
+
+const props = defineProps<{ item: RadarItem; detalhe?: boolean }>()
+const router = useRouter()
+
+const barra: Record<string, string> = { normal: 'bg-success', atencao: 'bg-warn-icon', forte: 'bg-danger' }
+</script>
+
+<template>
+  <button
+    type="button"
+    class="flex w-full items-stretch gap-3 rounded-[16px] bg-white p-3 text-left shadow-[0_1px_3px_rgba(15,23,42,0.06)] active:bg-line-soft"
+    @click="router.push(`/evento/${props.item.code}`)"
+  >
+    <span class="w-1 shrink-0 rounded-full" :class="barra[item.nivel]" />
+    <span class="w-[52px] shrink-0 pt-0.5 text-[14px] font-extrabold text-ink">{{ horaCurta(item.hora_brt) }}</span>
+    <span class="min-w-0 flex-1">
+      <span class="block text-[15px] font-bold leading-snug text-ink">{{ item.tipo.nome }}</span>
+      <span class="mt-0.5 block text-[12px] font-semibold text-faint">{{ item.tipo.pais }} · {{ item.tipo.fonte }}</span>
+      <span v-if="detalhe" class="mt-1.5 block text-[13.5px] leading-snug text-ink-3">{{ item.tipo.impacto_texto }}</span>
+    </span>
+    <ChevronRight :size="18" class="mt-0.5 shrink-0 text-faint" />
+  </button>
+</template>
