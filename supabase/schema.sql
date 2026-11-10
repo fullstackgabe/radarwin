@@ -152,3 +152,21 @@ insert into public.feriados (data, nome) values
 ('2027-04-21', 'Tiradentes'), ('2027-05-27', 'Corpus Christi'), ('2027-09-07', 'Independência'), ('2027-10-12', 'Nossa Senhora Aparecida'),
 ('2027-11-02', 'Finados'), ('2027-11-15', 'Proclamação da República'), ('2027-12-24', 'Véspera de Natal'), ('2027-12-31', 'Último dia do ano')
 on conflict (data) do nothing;
+create or replace function public.is_subscriber() returns boolean
+language sql stable security definer set search_path = public as $$
+  select exists (select 1 from public.subscribers s where lower(s.email) = lower(auth.jwt() ->> 'email') and s.active)
+$$;
+revoke all on function public.is_subscriber() from public;
+grant execute on function public.is_subscriber() to authenticated;
+
+drop policy if exists "perfil proprio" on public.profiles;
+create policy "perfil proprio" on public.profiles
+  for all to authenticated using (user_id = auth.uid() and public.is_subscriber()) with check (user_id = auth.uid() and public.is_subscriber());
+
+drop policy if exists "tipos visiveis para assinantes" on public.event_types;
+create policy "tipos visiveis para assinantes" on public.event_types
+  for select to authenticated using (public.is_subscriber());
+
+drop policy if exists "eventos visiveis para assinantes" on public.events;
+create policy "eventos visiveis para assinantes" on public.events
+  for select to authenticated using (public.is_subscriber());

@@ -79,7 +79,15 @@ Deno.serve(async (req) => {
     .from('profiles')
     .select('user_id,phone,callmebot_key,callmebot_phone,avisa_agenda,avisa_lembrete,so_alerta_forte')
     .eq('whatsapp_verified', true)
-  const perfis = ((pfs || []) as Perfil[]).filter((p) => p.phone && p.callmebot_key)
+  const { data: subs } = await sb.from('subscribers').select('email').eq('active', true)
+  const liberados = new Set((subs || []).map((s) => String(s.email).toLowerCase()))
+  const emails = new Map<string, string>()
+  for (let page = 1; page <= 20; page++) {
+    const { data: lista } = await sb.auth.admin.listUsers({ page, perPage: 1000 })
+    for (const u of lista?.users || []) emails.set(u.id, (u.email || '').toLowerCase())
+    if (!lista || lista.users.length < 1000) break
+  }
+  const perfis = ((pfs || []) as Perfil[]).filter((p) => p.phone && p.callmebot_key && liberados.has(emails.get(p.user_id) || ''))
   const resultado: Record<string, number> = {}
   const conta = (k: string) => (resultado[k] = (resultado[k] || 0) + 1)
 

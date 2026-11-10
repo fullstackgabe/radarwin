@@ -18,6 +18,8 @@ Deno.serve(async (req) => {
     const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { global: { headers: { Authorization: req.headers.get('Authorization') || '' } } })
     const { data: { user } } = await sb.auth.getUser()
     if (!user) return json({ error: 'unauthorized' }, 401)
+    const { data: ok } = await sb.rpc('is_subscriber')
+    if (ok !== true) return json({ error: 'forbidden' }, 403)
     const { data: p } = await sb.from('profiles').select('phone,callmebot_key,callmebot_phone').eq('user_id', user.id).maybeSingle()
     if (!p?.phone || !p?.callmebot_key) return json({ ok: false, status: 0, body: 'Cadastre o telefone e a API key primeiro.', phone: '' })
     const r = await sendWhatsApp(p.callmebot_phone || p.phone, p.callmebot_key, TEXT)
