@@ -36,7 +36,7 @@ const tom: Record<string, string> = {
 
     <template v-else-if="dia">
       <section class="rounded-[22px] bg-gradient-to-br px-5 py-7 text-center text-white shadow-[0_6px_18px_rgba(0,0,0,0.18)]" :class="tom[dia.nivel]">
-        <p class="text-[13px] font-semibold opacity-85">{{ rotuloDia(dia.data) }}</p>
+        <p v-if="rotuloDia(dia.data) !== 'Hoje'" class="text-[13px] font-semibold opacity-85">{{ rotuloDia(dia.data) }}</p>
         <p class="text-[13px] font-semibold opacity-85">{{ dataLonga(dia.data) }}</p>
         <p class="mt-4 text-[34px] leading-none">{{ NIVEL_EMOJI[dia.nivel] }}</p>
         <p class="mt-2 text-[26px] font-extrabold leading-tight">{{ NIVEL_LABEL[dia.nivel] }}</p>
@@ -55,7 +55,7 @@ const tom: Record<string, string> = {
 
       <div class="mt-10 px-2 text-center">
         <p class="text-[10.5px] font-extrabold uppercase tracking-[0.12em] text-faint">Fontes oficiais</p>
-        <p class="mt-1.5 text-[12px] font-medium text-faint">IBGE · Banco Central · BLS · Federal Reserve</p>
+        <p class="mx-auto mt-1.5 max-w-[300px] text-[12px] font-medium leading-relaxed text-faint">IBGE · Banco Central · B3 · Federal Reserve · BLS · BEA · Census Bureau · Banco Central Europeu</p>
       </div>
     </template>
   </div>

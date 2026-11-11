@@ -23,7 +23,7 @@ onMounted(() => {
           <h2 class="text-[15px] font-extrabold text-ink">
             {{ rotuloDia(d.data) }} <span class="font-semibold text-faint">{{ dataCurta(d.data) }}</span>
           </h2>
-          <NivelBadge :nivel="d.nivel" small />
+          <NivelBadge v-if="d.nivel !== 'normal'" :nivel="d.nivel" small />
         </div>
         <div class="flex flex-col gap-2">
           <EventoRow v-for="e in d.eventos" :key="e.id" :item="e" />

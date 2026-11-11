@@ -46,14 +46,6 @@ watch(code, carregar)
         <p class="mt-2 text-[13px] font-semibold text-faint">
           {{ tipo.pais }}<template v-if="horaProxima"> · sai às {{ horaCurta(horaProxima) }}</template>
         </p>
-        <a
-          :href="tipo.fonte_url"
-          target="_blank"
-          rel="noopener"
-          class="mt-4 inline-flex items-center gap-1.5 text-[13.5px] font-bold text-primary"
-        >
-          Fonte oficial: {{ tipo.fonte }} <ExternalLink :size="14" />
-        </a>
       </section>
 
       <section class="card text-center">
@@ -62,12 +54,19 @@ watch(code, carregar)
       </section>
 
       <section class="card text-center">
-        <h3 class="card-title">O que muda na abertura</h3>
+        <h3 class="card-title">Na abertura</h3>
         <div class="mx-auto mt-1 flex max-w-[320px] flex-col gap-0.5">
           <p v-for="(f, i) in frases(tipo.impacto_texto)" :key="i" class="text-[15px] leading-snug text-muted">{{ f }}</p>
         </div>
       </section>
 
+
+      <div class="mt-8 px-2 text-center">
+        <p class="text-[10.5px] font-extrabold uppercase tracking-[0.12em] text-faint">Fonte oficial</p>
+        <a :href="tipo.fonte_url" target="_blank" rel="noopener" class="mt-1.5 inline-flex items-center gap-1 text-[12px] font-medium text-faint underline-offset-2 hover:underline">
+          {{ tipo.fonte }} <ExternalLink :size="12" />
+        </a>
+      </div>
     </template>
   </div>
 </template>
