@@ -12,7 +12,7 @@ export function nivelDoDia(eventos: Evento[]): string {
 }
 
 const CABECALHO: Record<string, string> = {
-  normal: '✅ *Dia normal*\nOpere normalmente.',
+  normal: '✅ *Dia normal*\nPode operar normalmente.',
   atencao: '🟡 *Atenção: decisão de juros*\nOpere com cautela.',
   forte: '🔴 *Super quarta* (Copom + Fed)\nConsidere não operar.',
 }

@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router'
 import { ExternalLink } from '@lucide/vue'
 import { useRadarStore } from '@/stores/radar'
 import * as db from '@/lib/db'
-import { dataCurta, diaSemanaCurto, hojeBRT, horaCurta } from '@/lib/dias'
+import { hojeBRT, horaCurta } from '@/lib/dias'
 import { frases } from '@/lib/format'
 import NivelBadge from '@/components/NivelBadge.vue'
 import Spinner from '@/components/Spinner.vue'
@@ -18,7 +18,7 @@ const carregando = ref(true)
 const code = computed(() => String(route.params.code))
 const tipo = computed(() => radar.tipoPorCode.get(code.value) ?? null)
 const hoje = hojeBRT()
-const proximas = computed(() => datas.value.filter((d) => d.data >= hoje).sort((a, b) => a.data.localeCompare(b.data)).slice(0, 6))
+const proximas = computed(() => datas.value.filter((d) => d.data >= hoje).sort((a, b) => a.data.localeCompare(b.data)))
 const horaProxima = computed(() => proximas.value.find((d) => d.hora_brt)?.hora_brt ?? null)
 
 async function carregar() {
@@ -46,7 +46,6 @@ watch(code, carregar)
         <p class="mt-2 text-[13px] font-semibold text-faint">
           {{ tipo.pais }}<template v-if="horaProxima"> · sai às {{ horaCurta(horaProxima) }}</template>
         </p>
-        <p class="mx-auto mt-4 max-w-[320px] text-[14.5px] leading-relaxed text-ink-2">{{ tipo.o_que_e }}</p>
         <a
           :href="tipo.fonte_url"
           target="_blank"
@@ -58,23 +57,17 @@ watch(code, carregar)
       </section>
 
       <section class="card text-center">
+        <h3 class="card-title">Resumo</h3>
+        <p class="mx-auto mt-1 max-w-[320px] text-[15px] leading-snug text-muted">{{ tipo.o_que_e }}</p>
+      </section>
+
+      <section class="card text-center">
         <h3 class="card-title">O que muda na abertura</h3>
         <div class="mx-auto mt-1 flex max-w-[320px] flex-col gap-0.5">
-          <p v-for="(f, i) in frases(tipo.impacto_texto)" :key="i" class="text-[15px] leading-snug text-ink">{{ f }}</p>
+          <p v-for="(f, i) in frases(tipo.impacto_texto)" :key="i" class="text-[15px] leading-snug text-muted">{{ f }}</p>
         </div>
       </section>
 
-      <section class="card">
-        <h3 class="card-title text-center">Próximas datas</h3>
-        <div v-if="carregando" class="flex justify-center py-3"><Spinner :size="20" /></div>
-        <ul v-else-if="proximas.length" class="divide-y divide-line-soft">
-          <li v-for="d in proximas" :key="d.id" class="flex items-center justify-between py-2.5 text-[14px]">
-            <span class="font-semibold text-ink">{{ diaSemanaCurto(d.data) }}, {{ dataCurta(d.data) }}</span>
-            <span class="text-muted">{{ horaCurta(d.hora_brt) }}</span>
-          </li>
-        </ul>
-        <p v-else class="text-[13.5px] text-faint">Nenhuma data cadastrada ainda.</p>
-      </section>
     </template>
   </div>
 </template>

@@ -45,7 +45,7 @@ const tom: Record<string, string> = {
         </div>
       </section>
 
-      <h2 class="mb-3 mt-7 px-1 text-center text-[13px] font-extrabold uppercase tracking-wide text-muted">Notícias do dia</h2>
+      <h2 class="mb-3 mt-7 px-1 text-center text-[13px] font-extrabold uppercase tracking-wide text-ink">Notícias do dia</h2>
       <div v-if="dia.eventos.length" class="flex flex-col gap-3">
         <EventoRow v-for="e in dia.eventos" :key="e.id" :item="e" detalhe />
       </div>
@@ -53,9 +53,9 @@ const tom: Record<string, string> = {
         Nenhuma notícia relevante para a abertura hoje.
       </p>
 
-      <div class="mt-8 px-2 text-center text-[11.5px] leading-relaxed text-faint">
-        <p>Horários de Brasília.</p>
-        <p>Fontes oficiais: IBGE, Banco Central, BLS e Federal Reserve.</p>
+      <div class="mt-10 px-2 text-center">
+        <p class="text-[10.5px] font-extrabold uppercase tracking-[0.12em] text-faint">Fontes oficiais</p>
+        <p class="mt-1.5 text-[12px] font-medium text-faint">IBGE · Banco Central · BLS · Federal Reserve</p>
       </div>
     </template>
   </div>
