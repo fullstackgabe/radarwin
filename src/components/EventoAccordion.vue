@@ -33,7 +33,7 @@ const barra: Record<string, string> = { normal: 'bg-success', atencao: 'bg-[#eab
         <p class="text-[10.5px] font-extrabold uppercase tracking-[0.1em] text-ink">Resumo</p>
         <p class="mt-1 text-[13.5px] leading-snug text-muted">{{ item.tipo.o_que_e }}</p>
         <p class="mt-2.5 text-[10.5px] font-extrabold uppercase tracking-[0.1em] text-ink">Na abertura</p>
-        <p class="mt-1 text-[13.5px] leading-snug text-muted">{{ frases(item.tipo.impacto_texto).join(' ') }}</p>
+        <p v-for="(f, i) in frases(item.tipo.impacto_texto)" :key="i" class="text-[13.5px] leading-snug text-muted" :class="{ 'mt-1': i === 0 }">{{ f }}</p>
       </div>
     </div>
   </div>

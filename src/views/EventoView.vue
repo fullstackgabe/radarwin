@@ -63,7 +63,7 @@ watch(code, carregar)
         <p class="mt-1.5 text-[14.5px] leading-snug text-ink-2">{{ tipo.o_que_e }}</p>
         <div class="mt-4 border-t border-line pt-4">
           <p class="text-[10.5px] font-extrabold uppercase tracking-[0.1em] text-ink">Na abertura</p>
-          <p class="mt-1.5 text-[14.5px] leading-snug text-ink-2">{{ frases(tipo.impacto_texto).join(' ') }}</p>
+          <p v-for="(f, i) in frases(tipo.impacto_texto)" :key="i" class="text-[14.5px] leading-snug text-ink-2" :class="{ 'mt-1.5': i === 0 }">{{ f }}</p>
         </div>
       </section>
 
