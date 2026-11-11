@@ -54,7 +54,7 @@ const tom: Record<string, string> = {
             <template v-if="rotuloDia(dia.data) !== 'Hoje'">{{ rotuloDia(dia.data) }} · </template>{{ dataLonga(dia.data) }}
           </p>
           <p class="text-[22px] font-extrabold leading-tight">{{ NIVEL_LABEL[dia.nivel] }}</p>
-          <p class="mt-0.5 text-[13px] leading-snug opacity-95">{{ frases(NIVEL_FRASE[dia.nivel]).join(' ') }}</p>
+          <p v-for="(f, i) in frases(NIVEL_FRASE[dia.nivel])" :key="i" class="text-[13px] leading-snug opacity-95" :class="{ 'mt-0.5': i === 0 }">{{ f }}</p>
         </div>
       </section>
 
