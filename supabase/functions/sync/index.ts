@@ -1,5 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
-import { agoraBR, diaSemana, localParaBR, proximoPregao, somaDias } from '../_shared/tempo.ts'
+import { agoraBR, diaSemana, localParaBR, partesEm, proximoPregao, somaDias, TZ_BR } from '../_shared/tempo.ts'
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!
 const SERVICE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
@@ -194,6 +194,55 @@ async function fomc(): Promise<Linha[]> {
   return out
 }
 
+async function bcbCalendario(lista: string, code: string, de: string, ate: string): Promise<Linha[]> {
+  const url = `https://www.bcb.gov.br/api/servico/sitebcb/calendar?inicioAgenda='${de}'&fimAgenda='${ate}'&lista=${encodeURIComponent(lista)}`
+  const r = await fetch(url, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(30000) })
+  if (!r.ok) throw new Error(`BCB ${lista} HTTP ${r.status}`)
+  const j = await r.json()
+  const out: Linha[] = []
+  for (const x of (j.conteudo || []) as { dataEvento: string; diaInteiro?: string }[]) {
+    const br = partesEm(TZ_BR, new Date(x.dataEvento))
+    out.push({ code, data: br.data, hora_brt: x.diaInteiro === 'Sim' ? null : br.hm })
+  }
+  if (!out.length) throw new Error(`BCB ${lista}: nenhuma data encontrada`)
+  return out
+}
+
+function igpm(ano: number, feriados: Set<string>): Linha[] {
+  const out: Linha[] = []
+  for (let mes = 1; mes <= 12; mes++) {
+    let d = somaDias(iso(mes === 12 ? ano + 1 : ano, mes === 12 ? 1 : mes + 1, 1), -1)
+    const util = (x: string) => diaSemana(x) !== 0 && diaSemana(x) !== 6 && !feriados.has(x)
+    while (!util(d)) d = somaDias(d, -1)
+    d = somaDias(d, -1)
+    while (!util(d)) d = somaDias(d, -1)
+    out.push({ code: 'igpm', data: d, hora_brt: '08:00' })
+  }
+  return out
+}
+
+async function falasFed(): Promise<Linha[]> {
+  const txt = (await pagina('https://www.federalreserve.gov/json/calendar.json')).replace(/^\uFEFF/, '')
+  const j = JSON.parse(txt) as { events: { title?: string; month?: string; days?: string; time?: string; type?: string }[] }
+  const out: Linha[] = []
+  for (const e of j.events) {
+    const t = e.title || ''
+    if (!/^(Speech|Discussion|Testimony|Remarks|Panel|Fireside)[^-]*- Chair(man)? /.test(t)) continue
+    if (!e.month || !e.days) continue
+    const dia = e.days.match(/\d{1,2}/)
+    if (!dia) continue
+    const data = `${e.month}-${dia[0].padStart(2, '0')}`
+    const h = (e.time || '').match(/(\d{1,2}(?::\d{2})?)\s*([ap])\.?m/i)
+    if (!h) {
+      out.push({ code: 'fala_fed', data, hora_brt: null })
+      continue
+    }
+    const br = localParaBR(data, hora24(h[1]!.includes(':') ? h[1]! : `${h[1]}:00`, `${h[2]}m`), 'America/New_York')
+    out.push({ code: 'fala_fed', data: br.data, hora_brt: br.hm })
+  }
+  return out
+}
+
 async function oficiais(de: string, ate: string): Promise<Linha[]> {
   const { data, error } = await sb.from('datas_oficiais').select('code,data,hora_local,fuso').gte('data', de).lte('data', ate)
   if (error) throw error
@@ -217,6 +266,7 @@ Deno.serve(async (req) => {
   for (const ano of [Number(hoje.slice(0, 4)), Number(hoje.slice(0, 4)) + 1]) {
     linhas.push(...feriadosEUA(ano).filter((l) => l.data >= hoje && l.data <= ate))
     linhas.push(...vencimentosWin(ano, feriados).filter((l) => l.data >= hoje && l.data <= ate))
+    linhas.push(...igpm(ano, feriados).filter((l) => l.data >= hoje && l.data <= ate))
   }
   const fontes: [string, () => Promise<Linha[]>][] = [
     ['ibge', () => ibge(hoje, ate)],
@@ -225,6 +275,9 @@ Deno.serve(async (req) => {
     ['bea', bea],
     ['census', census],
     ['bce', bce],
+    ['ibcbr', () => bcbCalendario('Índice de atividade econômica (IBC-Br)', 'ibcbr', hoje, ate)],
+    ['focus', () => bcbCalendario('Focus', 'focus', hoje, ate)],
+    ['fed_falas', falasFed],
   ]
   const resumo: Record<string, string> = {}
   for (const [nome, fn] of fontes) {
