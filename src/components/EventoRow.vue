@@ -8,7 +8,7 @@ import type { RadarItem } from '@/types'
 const props = defineProps<{ item: RadarItem; detalhe?: boolean }>()
 const router = useRouter()
 
-const barra: Record<string, string> = { normal: 'bg-success', atencao: 'bg-warn-icon', forte: 'bg-danger' }
+const barra: Record<string, string> = { normal: 'bg-success', atencao: 'bg-[#eab308]', forte: 'bg-danger' }
 </script>
 
 <template>
