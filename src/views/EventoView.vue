@@ -61,7 +61,7 @@ watch(code, carregar)
       <section class="mt-4 rounded-[16px] bg-white px-4 py-4 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
         <p class="text-[10.5px] font-extrabold uppercase tracking-[0.1em] text-ink">Resumo</p>
         <p class="mt-1.5 text-[14.5px] leading-snug text-ink-2">{{ tipo.o_que_e }}</p>
-        <div class="mt-4 rounded-[12px] bg-page px-3.5 py-3">
+        <div class="mt-4 border-t border-line pt-4">
           <p class="text-[10.5px] font-extrabold uppercase tracking-[0.1em] text-ink">Na abertura</p>
           <p class="mt-1.5 text-[14.5px] leading-snug text-ink-2">{{ frases(tipo.impacto_texto).join(' ') }}</p>
         </div>
