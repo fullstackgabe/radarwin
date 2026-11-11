@@ -6,7 +6,7 @@ import { nivelDoDia, textoAgenda, textoLembrete, type Evento, type Tipo } from '
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!
 const SERVICE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
 const CRON_SECRET = Deno.env.get('CRON_SECRET') || ''
-const PORTAL_URL = (Deno.env.get('PORTAL_URL') || 'https://radarnews-app.vercel.app').replace(/\/$/, '')
+const PORTAL_URL = (Deno.env.get('PORTAL_URL') || 'https://radarwin.vercel.app').replace(/\/$/, '')
 const HORA_AGENDA = '08:30'
 const ANTECEDENCIA_MIN = 5
 const JANELA_LEMBRETE = { de: '09:00', ate: '17:40' }

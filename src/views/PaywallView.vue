@@ -7,7 +7,7 @@ import Brand from '@/components/Brand.vue'
 const auth = useAuthStore()
 
 const PRESENTATION =
-  'O Radar News é o portal privado do grupo 📡\n\n' +
+  'O Radar WIN é o portal privado do grupo 📡\n\n' +
   'Ele mostra as notícias econômicas que mexem no mini índice\n' +
   'e diz o que cada uma muda na nossa abertura,\n' +
   'com aviso no seu WhatsApp antes de cada uma.\n\n' +

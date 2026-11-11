@@ -19,7 +19,7 @@ const CABECALHO: Record<string, string> = {
 
 export function textoAgenda(data: string, eventos: Evento[], tipos: Map<string, Tipo>, link: string): string {
   const nivel = nivelDoDia(eventos)
-  const linhas = [`📡 *Radar News — ${dataBR(data)}*`, '', CABECALHO[nivel]!]
+  const linhas = [`📡 *Radar WIN — ${dataBR(data)}*`, '', CABECALHO[nivel]!]
   const lista = eventos
     .filter((e) => e.code !== 'super_quarta')
     .sort((a, b) => (a.hora_brt || '00:00').localeCompare(b.hora_brt || '00:00'))
