@@ -12,9 +12,9 @@ export function nivelDoDia(eventos: Evento[]): string {
 }
 
 const CABECALHO: Record<string, string> = {
-  normal: '✅ *Dia normal*\nPode operar normalmente.',
-  atencao: '🟡 *Atenção*\nTem evento que pode mexer na abertura. Opere com cautela.',
-  forte: '🔴 *Super quarta* (Copom + Fed)\nConsidere não operar.',
+  normal: '🟢 *Dia tranquilo*\nNada atrapalhando a abertura. Pode operar normalmente.',
+  atencao: '🟡 *Dia agitado*\nTem evento que pode mexer na abertura. Opere com cautela.',
+  forte: '🔴 *Dia arriscado*\nSuper quarta: Copom e Fed no mesmo dia. Considere não operar.',
 }
 
 export function textoAgenda(data: string, eventos: Evento[], tipos: Map<string, Tipo>, link: string): string {

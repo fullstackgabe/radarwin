@@ -246,12 +246,12 @@ export const CATALOGO: EventType[] = [
 export const NIVEL_ORDEM: Record<Nivel, number> = { normal: 0, atencao: 1, forte: 2 }
 
 export const NIVEL_LABEL: Record<Nivel, string> = {
-  normal: 'Dia normal',
-  atencao: 'Atenção',
-  forte: 'Alerta forte',
+  normal: 'Dia tranquilo',
+  atencao: 'Dia agitado',
+  forte: 'Dia arriscado',
 }
 
-export const NIVEL_EMOJI: Record<Nivel, string> = { normal: '✅', atencao: '🟡', forte: '🔴' }
+export const NIVEL_EMOJI: Record<Nivel, string> = { normal: '🟢', atencao: '🟡', forte: '🔴' }
 
 export const NIVEL_FRASE: Record<Nivel, string> = {
   normal: 'Nada atrapalhando a abertura. Pode operar normalmente.',
