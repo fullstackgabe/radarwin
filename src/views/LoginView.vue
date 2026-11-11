@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Radar } from '@lucide/vue'
+import RadarLogo from '@/components/RadarLogo.vue'
 import { useAuthStore } from '@/stores/auth'
 import { isDemo } from '@/lib/config'
 import Spinner from '@/components/Spinner.vue'
@@ -12,9 +12,7 @@ const auth = useAuthStore()
 <template>
   <div class="flex flex-1 flex-col justify-center overflow-y-auto bg-white p-6">
     <div class="mb-7 flex flex-col items-center">
-      <div class="mb-3.5 flex h-[72px] w-[72px] items-center justify-center rounded-[22px] bg-primary-soft">
-        <Radar :size="38" :stroke-width="1.75" class="text-primary" />
-      </div>
+      <RadarLogo :size="72" class="mb-3.5 drop-shadow-[0_6px_14px_rgba(0,0,0,0.25)]" />
       <h1 class="text-[28px] font-extrabold text-ink"><Brand tone="dark" /></h1>
       <p class="mt-1.5 text-center text-[15px] text-muted">Agenda econômica e impacto na abertura do mini índice</p>
     </div>

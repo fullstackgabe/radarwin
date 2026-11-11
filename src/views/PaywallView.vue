@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { LogOut, Radar, Sparkles } from '@lucide/vue'
+import RadarLogo from '@/components/RadarLogo.vue'
+import { LogOut, Sparkles } from '@lucide/vue'
 import { useAuthStore } from '@/stores/auth'
 import { SUBSCRIBE_URL } from '@/lib/config'
 import Brand from '@/components/Brand.vue'
@@ -18,9 +19,7 @@ const PRESENTATION =
   <div class="flex flex-1 flex-col overflow-y-auto bg-page px-6 pb-8 pt-[calc(env(safe-area-inset-top)+28px)]">
     <div class="mx-auto flex w-full max-w-[380px] flex-1 flex-col">
       <div class="mb-5 flex flex-col items-center">
-        <div class="mb-3 flex h-[64px] w-[64px] items-center justify-center rounded-[20px] bg-primary-soft">
-          <Radar :size="34" :stroke-width="1.75" class="text-primary" />
-        </div>
+        <RadarLogo :size="64" class="mb-3 drop-shadow-[0_6px_14px_rgba(0,0,0,0.25)]" />
         <h1 class="text-[24px] font-extrabold text-ink"><Brand tone="dark" /></h1>
       </div>
 
