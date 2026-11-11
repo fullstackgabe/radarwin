@@ -12,8 +12,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
       manifest: {
-        name: 'Radar Opening',
-        short_name: 'Radar Opening',
+        name: 'Radar News',
+        short_name: 'Radar News',
         description: '',
         lang: 'pt-BR',
         start_url: '/hoje',

@@ -19,7 +19,7 @@ async function send() {
     const r = await profile.sendTest()
     if (r.ok) {
       state.value = 'sent'
-      if (isDemo) toast('📲 (simulado) ✅ Radar Opening conectado!')
+      if (isDemo) toast('📲 (simulado) ✅ Radar News conectado!')
     } else if (r.status === 203) {
       state.value = 'invalid'
     } else {

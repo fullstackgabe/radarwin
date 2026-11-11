@@ -3,5 +3,5 @@ withDefaults(defineProps<{ tone?: 'light' | 'dark' }>(), { tone: 'light' })
 </script>
 
 <template>
-  <span>Radar <span :class="tone === 'dark' ? 'text-primary' : 'text-accent'">Opening</span></span>
+  <span>Radar <span :class="tone === 'dark' ? 'text-primary' : 'text-accent'">News</span></span>
 </template>
