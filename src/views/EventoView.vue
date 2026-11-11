@@ -19,6 +19,7 @@ const code = computed(() => String(route.params.code))
 const tipo = computed(() => radar.tipoPorCode.get(code.value) ?? null)
 const hoje = hojeBRT()
 const proximas = computed(() => datas.value.filter((d) => d.data >= hoje).sort((a, b) => a.data.localeCompare(b.data)).slice(0, 6))
+const horaProxima = computed(() => proximas.value.find((d) => d.hora_brt)?.hora_brt ?? null)
 
 async function carregar() {
   carregando.value = true
@@ -42,8 +43,9 @@ watch(code, carregar)
       <section class="card text-center">
         <NivelBadge :nivel="tipo.nivel" />
         <h2 class="mt-3 text-[21px] font-extrabold leading-tight text-ink">{{ tipo.nome }}</h2>
-        <p class="mt-2 text-[13px] font-semibold text-faint">{{ tipo.pais }}</p>
-        <p class="text-[13px] font-semibold text-faint">{{ tipo.horario_texto }} (Brasília)</p>
+        <p class="mt-2 text-[13px] font-semibold text-faint">
+          {{ tipo.pais }}<template v-if="horaProxima"> · sai às {{ horaCurta(horaProxima) }}</template>
+        </p>
         <p class="mx-auto mt-4 max-w-[320px] text-[14.5px] leading-relaxed text-ink-2">{{ tipo.o_que_e }}</p>
         <a
           :href="tipo.fonte_url"
