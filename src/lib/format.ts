@@ -4,6 +4,8 @@ export const uid = () => `${Date.now()}-${Math.round(Math.random() * 1e9)}`
 
 export const fmtDuration = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`
 
+export const frases = (t: string) => (t || '').split(/(?<=\.)\s+/).filter(Boolean)
+
 export const capitalize = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s)
 
 export function phoneMask(ddi: string, local: string): string {

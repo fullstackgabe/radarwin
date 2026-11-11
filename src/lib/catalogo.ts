@@ -10,7 +10,7 @@ export const CATALOGO: EventType[] = [
     horario_texto: 'Fed às 15h/16h · Copom após o fechamento',
     nivel: 'forte',
     o_que_e: 'Dia em que o Copom e o Fed (FOMC) decidem os juros no mesmo dia.',
-    impacto_texto: 'Copom e Fed decidem os juros no mesmo dia. O mercado passa a manhã esperando as decisões e o movimento do 1º candle costuma não continuar. É o dia mais arriscado para operar a abertura: considere ficar de fora.',
+    impacto_texto: 'Copom e Fed decidem juros no mesmo dia. O 1º candle costuma não continuar. Considere não operar.',
     ordem: 1,
   },
   {
@@ -22,7 +22,7 @@ export const CATALOGO: EventType[] = [
     horario_texto: '15h (16h no inverno americano)',
     nivel: 'atencao',
     o_que_e: 'O banco central americano anuncia a taxa de juros dos EUA.',
-    impacto_texto: 'A decisão sai à tarde, mas o mercado fica em compasso de espera desde cedo e o movimento do 1º candle costuma não continuar. Opere a abertura com cautela.',
+    impacto_texto: 'Mercado em espera até a decisão. O 1º candle costuma não continuar. Opere com cautela.',
     ordem: 2,
   },
   {
@@ -34,7 +34,7 @@ export const CATALOGO: EventType[] = [
     horario_texto: 'Após o fechamento (~18h30)',
     nivel: 'atencao',
     o_que_e: 'O Banco Central anuncia a taxa Selic.',
-    impacto_texto: 'A decisão sai depois do fechamento, mas o dia costuma ser de espera e a abertura perde força. Opere com cautela. A abertura do dia seguinte é normal.',
+    impacto_texto: 'Mercado em espera até a decisão. A abertura perde força. Opere com cautela.',
     ordem: 3,
   },
   {
@@ -46,7 +46,7 @@ export const CATALOGO: EventType[] = [
     horario_texto: '9h',
     nivel: 'normal',
     o_que_e: 'Inflação oficial do Brasil no mês.',
-    impacto_texto: 'Sai às 9h, junto com o 1º candle: o candle de abertura pode vir maior que o normal, mas a notícia não costuma atrapalhar a abertura. Opere normal.',
+    impacto_texto: 'O candle de abertura pode vir maior. Não atrapalha a abertura. Opere normal.',
     ordem: 4,
   },
   {
@@ -58,7 +58,7 @@ export const CATALOGO: EventType[] = [
     horario_texto: '9h',
     nivel: 'normal',
     o_que_e: 'Prévia da inflação oficial do Brasil.',
-    impacto_texto: 'Sai às 9h, junto com o 1º candle: o candle de abertura pode vir maior que o normal, mas a notícia não costuma atrapalhar a abertura. Opere normal.',
+    impacto_texto: 'O candle de abertura pode vir maior. Não atrapalha a abertura. Opere normal.',
     ordem: 5,
   },
   {
@@ -70,7 +70,7 @@ export const CATALOGO: EventType[] = [
     horario_texto: '9h30 (10h30 no inverno americano)',
     nivel: 'normal',
     o_que_e: 'Relatório de emprego dos EUA, um dos dados que mais mexem nos mercados.',
-    impacto_texto: 'Sai com a abertura já em andamento. Não costuma atrapalhar a abertura, mas espere volatilidade forte na hora da divulgação.',
+    impacto_texto: 'Volatilidade forte na divulgação. Não atrapalha a abertura. Opere normal.',
     ordem: 6,
   },
   {
@@ -82,7 +82,7 @@ export const CATALOGO: EventType[] = [
     horario_texto: '9h30 (10h30 no inverno americano)',
     nivel: 'normal',
     o_que_e: 'Inflação ao consumidor dos EUA.',
-    impacto_texto: 'Sai com a abertura já em andamento. Não costuma atrapalhar a abertura, mas espere volatilidade forte na hora da divulgação.',
+    impacto_texto: 'Volatilidade forte na divulgação. Não atrapalha a abertura. Opere normal.',
     ordem: 7,
   },
   {
@@ -94,7 +94,7 @@ export const CATALOGO: EventType[] = [
     horario_texto: 'Dia todo',
     nivel: 'normal',
     o_que_e: 'Primeiro pregão depois da decisão de juros americana.',
-    impacto_texto: 'Primeiro pregão depois da decisão americana: a abertura costuma voltar a andar normalmente. Opere normal.',
+    impacto_texto: 'A abertura volta ao normal. Opere normal.',
     ordem: 8,
   },
 ]
@@ -110,9 +110,9 @@ export const NIVEL_LABEL: Record<Nivel, string> = {
 export const NIVEL_EMOJI: Record<Nivel, string> = { normal: '✅', atencao: '🟡', forte: '🔴' }
 
 export const NIVEL_FRASE: Record<Nivel, string> = {
-  normal: 'Nada no calendário que atrapalhe a abertura. Opere normal.',
-  atencao: 'Dia de decisão de juros: a abertura costuma perder força. Opere com cautela.',
-  forte: 'Super quarta: o dia mais arriscado para operar a abertura. Considere não operar.',
+  normal: 'Nada atrapalha a abertura. Opere normal.',
+  atencao: 'Dia de decisão de juros. Opere com cautela.',
+  forte: 'Copom e Fed no mesmo dia. Considere não operar.',
 }
 
 export function maiorNivel(niveis: Nivel[]): Nivel {
