@@ -110,7 +110,7 @@ export const NIVEL_LABEL: Record<Nivel, string> = {
 export const NIVEL_EMOJI: Record<Nivel, string> = { normal: '✅', atencao: '🟡', forte: '🔴' }
 
 export const NIVEL_FRASE: Record<Nivel, string> = {
-  normal: 'Nada atrapalha a abertura. Opere normalmente.',
+  normal: 'Nada atrapalhando a abertura. Opere normalmente.',
   atencao: 'Dia de decisão de juros. Opere com cautela.',
   forte: 'Copom e Fed no mesmo dia. Considere não operar.',
 }
