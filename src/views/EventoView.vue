@@ -57,8 +57,8 @@ watch(code, carregar)
 
       <section class="card text-center">
         <h3 class="card-title">O que muda na abertura</h3>
-        <div class="mx-auto mt-1 flex max-w-[320px] flex-col gap-2">
-          <p v-for="(f, i) in frases(tipo.impacto_texto)" :key="i" class="text-[15px] leading-relaxed text-ink">{{ f }}</p>
+        <div class="mx-auto mt-1 flex max-w-[320px] flex-col gap-0.5">
+          <p v-for="(f, i) in frases(tipo.impacto_texto)" :key="i" class="text-[15px] leading-snug text-ink">{{ f }}</p>
         </div>
       </section>
 

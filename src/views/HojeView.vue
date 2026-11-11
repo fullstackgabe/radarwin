@@ -40,8 +40,8 @@ const tom: Record<string, string> = {
         <p class="text-[13px] font-semibold opacity-85">{{ dataLonga(dia.data) }}</p>
         <p class="mt-4 text-[34px] leading-none">{{ NIVEL_EMOJI[dia.nivel] }}</p>
         <p class="mt-2 text-[26px] font-extrabold leading-tight">{{ NIVEL_LABEL[dia.nivel] }}</p>
-        <div class="mx-auto mt-4 flex max-w-[300px] flex-col gap-1.5">
-          <p v-for="(f, i) in frases(NIVEL_FRASE[dia.nivel])" :key="i" class="text-[14.5px] leading-relaxed opacity-95">{{ f }}</p>
+        <div class="mx-auto mt-4 flex max-w-[300px] flex-col gap-0.5">
+          <p v-for="(f, i) in frases(NIVEL_FRASE[dia.nivel])" :key="i" class="text-[14.5px] leading-snug opacity-95">{{ f }}</p>
         </div>
       </section>
 
