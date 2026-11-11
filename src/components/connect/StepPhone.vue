@@ -31,9 +31,9 @@ async function next() {
 
 <template>
   <div>
-    <h2 class="text-[20px] font-extrabold text-ink">Vamos conectar seu WhatsApp</h2>
+    <h2 class="text-[20px] font-extrabold text-ink">Conecte seu WhatsApp</h2>
     <p class="mt-1.5 text-[14px] leading-snug text-muted">
-      É por lá que eu te aviso das notícias que mexem na abertura. Leva 2 minutinhos e só precisa fazer uma vez.
+      Os alertas de cada divulgação são enviados pelo WhatsApp. A configuração leva cerca de 2 minutos e é feita uma única vez.
     </p>
     <label class="label">Seu número do WhatsApp</label>
     <PhoneInput v-model:ddi="ddi" v-model:local="local" :error="error" />

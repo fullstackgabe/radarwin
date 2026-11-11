@@ -7,11 +7,11 @@ import Brand from '@/components/Brand.vue'
 const auth = useAuthStore()
 
 const PRESENTATION =
-  'O Radar WIN é o portal privado do grupo 📡\n\n' +
-  'Ele mostra as notícias econômicas que mexem no mini índice\n' +
-  'e diz o que cada uma muda na nossa abertura,\n' +
-  'com aviso no seu WhatsApp antes de cada uma.\n\n' +
-  'Seu e-mail ainda não está liberado. Peça acesso 👇'
+  'O Radar WIN é um portal de acesso restrito.\n\n' +
+  'Agenda dos indicadores econômicos que afetam o mini índice,\n' +
+  'com o impacto de cada um na abertura do pregão\n' +
+  'e alertas no WhatsApp antes de cada divulgação.\n\n' +
+  'Seu e-mail ainda não tem acesso. Solicite abaixo.'
 </script>
 
 <template>
@@ -33,7 +33,7 @@ const PRESENTATION =
           class="mt-4 flex items-center justify-center gap-2 rounded-xl bg-primary py-3 text-[15px] font-extrabold text-white"
         >
           <Sparkles :size="17" />
-          Quero acesso
+          Solicitar acesso
         </a>
       </div>
 

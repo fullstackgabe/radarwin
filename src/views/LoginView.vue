@@ -16,7 +16,7 @@ const auth = useAuthStore()
         <Radar :size="38" :stroke-width="1.75" class="text-primary" />
       </div>
       <h1 class="text-[28px] font-extrabold text-ink"><Brand tone="dark" /></h1>
-      <p class="mt-1.5 text-center text-[15px] text-muted">As notícias que mexem na nossa abertura</p>
+      <p class="mt-1.5 text-center text-[15px] text-muted">Agenda econômica e impacto na abertura do mini índice</p>
     </div>
 
     <button

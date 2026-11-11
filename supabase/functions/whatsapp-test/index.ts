@@ -4,7 +4,7 @@ import { sendWhatsApp } from '../_shared/callmebot.ts'
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!
 const SUPABASE_ANON_KEY = Deno.env.get('SUPABASE_ANON_KEY')!
 const PORTAL_URL = (Deno.env.get('PORTAL_URL') || 'https://radarwin.vercel.app').replace(/\/$/, '')
-const TEXT = `📡 *Radar WIN conectado!*\n\nA partir de agora eu te aviso por aqui das notícias que mexem na nossa abertura.\n\n🔗 ${PORTAL_URL}`
+const TEXT = `📡 *Radar WIN conectado!*\n\nVocê passa a receber aqui a agenda econômica do dia e os alertas antes de cada divulgação.\n\n🔗 ${PORTAL_URL}`
 
 const cors = {
   'Access-Control-Allow-Origin': '*',

@@ -69,7 +69,7 @@ export const CATALOGO: EventType[] = [
     fonte_url: 'https://www.bls.gov/schedule/news_release/empsit.htm',
     horario_texto: '9h30 (10h30 no inverno americano)',
     nivel: 'normal',
-    o_que_e: 'Relatório de emprego dos EUA, um dos dados que mais mexem nos mercados.',
+    o_que_e: 'Relatório de emprego dos EUA, um dos indicadores de maior impacto nos mercados.',
     impacto_texto: 'Volatilidade forte na divulgação. Não atrapalha a abertura. Opere normalmente.',
     ordem: 6,
   },
