@@ -68,7 +68,7 @@ const tom: Record<string, string> = {
 
       <div class="mt-6 px-2 text-center">
         <p class="text-[10.5px] font-extrabold uppercase tracking-[0.12em] text-faint">Fontes oficiais</p>
-        <p class="mx-auto mt-1.5 max-w-[300px] text-[12px] font-medium leading-relaxed text-faint">IBGE · Banco Central · B3 · Federal Reserve · BLS · BEA · Census Bureau · Banco Central Europeu</p>
+        <p class="mx-auto mt-1.5 max-w-[300px] text-[12px] font-medium leading-relaxed text-faint">IBGE · Banco Central · FGV · B3 · Federal Reserve · BLS · BEA · Census Bureau · NYSE · Banco Central Europeu</p>
       </div>
     </template>
   </div>
