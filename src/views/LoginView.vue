@@ -31,7 +31,7 @@ const auth = useAuthStore()
       v-else
       type="button"
       :disabled="auth.busy"
-      class="flex items-center justify-center gap-2.5 rounded-[14px] bg-primary py-[15px] text-[15px] font-bold text-white shadow-[0_4px_8px_rgba(29,78,216,0.25)]"
+      class="flex items-center justify-center gap-2.5 rounded-[14px] bg-primary py-[15px] text-[15px] font-bold text-white shadow-[0_4px_8px_rgba(0,0,0,0.25)]"
       :class="auth.busy ? 'opacity-70' : ''"
       @click="auth.signInGoogle()"
     >

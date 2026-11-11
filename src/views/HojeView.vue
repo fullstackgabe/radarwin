@@ -35,7 +35,7 @@ const tom: Record<string, string> = {
     <p v-else-if="radar.error" class="py-10 text-center text-[14px] text-danger">{{ radar.error }}</p>
 
     <template v-else-if="dia">
-      <section class="rounded-[22px] bg-gradient-to-br px-5 py-7 text-center text-white shadow-[0_6px_18px_rgba(15,23,42,0.18)]" :class="tom[dia.nivel]">
+      <section class="rounded-[22px] bg-gradient-to-br px-5 py-7 text-center text-white shadow-[0_6px_18px_rgba(0,0,0,0.18)]" :class="tom[dia.nivel]">
         <p class="text-[13px] font-semibold opacity-85">{{ rotuloDia(dia.data) }}</p>
         <p class="text-[13px] font-semibold opacity-85">{{ dataLonga(dia.data) }}</p>
         <p class="mt-4 text-[34px] leading-none">{{ NIVEL_EMOJI[dia.nivel] }}</p>
@@ -49,7 +49,7 @@ const tom: Record<string, string> = {
       <div v-if="dia.eventos.length" class="flex flex-col gap-3">
         <EventoRow v-for="e in dia.eventos" :key="e.id" :item="e" detalhe />
       </div>
-      <p v-else class="rounded-[16px] bg-white px-4 py-5 text-center text-[14px] text-muted shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+      <p v-else class="rounded-[16px] bg-white px-4 py-5 text-center text-[14px] text-muted shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
         Nenhuma notícia relevante para a abertura hoje.
       </p>
 

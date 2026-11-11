@@ -27,7 +27,7 @@ onMounted(() => {
         <div v-if="d.eventos.length" class="flex flex-col gap-2">
           <EventoRow v-for="e in d.eventos" :key="e.id" :item="e" />
         </div>
-        <p v-else class="rounded-[14px] bg-white px-4 py-3 text-[13.5px] text-faint shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+        <p v-else class="rounded-[14px] bg-white px-4 py-3 text-[13.5px] text-faint shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
           Sem notícias relevantes.
         </p>
       </section>

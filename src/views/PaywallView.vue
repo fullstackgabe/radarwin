@@ -24,7 +24,7 @@ const PRESENTATION =
         <h1 class="text-[24px] font-extrabold text-ink"><Brand tone="dark" /></h1>
       </div>
 
-      <div class="rounded-[22px] bg-white p-5 shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+      <div class="rounded-[22px] bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
         <p class="whitespace-pre-line text-[15px] leading-[22px] text-ink">{{ PRESENTATION }}</p>
         <a
           :href="SUBSCRIBE_URL"

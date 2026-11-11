@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #1d4ed8;
-  --color-primary-soft: #dbeafe;
-  --color-primary-border: #bfdbfe;
-  --color-accent: #bfdbfe;
+  --color-primary: #000000;
+  --color-primary-soft: #f4f4f5;
+  --color-primary-border: #d4d4d8;
+  --color-accent: #f2c14e;
   --color-success: #16a34a;
   --color-success-soft: #dcfce7;
   --color-danger: #dc2626;
@@ -16,16 +16,16 @@
   --color-warn-border: #fde68a;
   --color-warn-text: #7c2d12;
   --color-warn-icon: #b45309;
-  --color-chat: #eceff5;
-  --color-page: #f8fafc;
-  --color-line: #e2e8f0;
-  --color-line-soft: #f1f5f9;
-  --color-ink: #0f172a;
-  --color-ink-2: #334155;
-  --color-ink-3: #475569;
-  --color-muted: #64748b;
-  --color-faint: #94a3b8;
-  --color-chip: #f1f5f9;
+  --color-chat: #f0f0f0;
+  --color-page: #fafafa;
+  --color-line: #e4e4e7;
+  --color-line-soft: #f4f4f5;
+  --color-ink: #09090b;
+  --color-ink-2: #3f3f46;
+  --color-ink-3: #52525b;
+  --color-muted: #71717a;
+  --color-faint: #a1a1aa;
+  --color-chip: #f4f4f5;
 }
 
 html, body {
@@ -65,7 +65,7 @@ body {
 
 @media (min-width: 720px) {
   body {
-    background: linear-gradient(135deg, #dbeafe, #eff6ff);
+    background: linear-gradient(135deg, #e4e4e7, #fafafa);
     min-height: 100vh;
   }
   #app {
@@ -74,7 +74,7 @@ body {
     height: min(860px, calc(100vh - 48px));
     margin: 24px auto;
     border-radius: 36px;
-    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.22);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
   }
 }
 
@@ -157,7 +157,7 @@ body {
     border-radius: 16px;
     background: #fff;
     padding: 20px 18px;
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
   }
   .card-title {
     margin-bottom: 12px;

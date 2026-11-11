@@ -26,7 +26,7 @@ function done() {
     <div class="mx-auto w-full max-w-[380px]">
       <div class="mb-6 text-center text-[22px] font-extrabold text-ink"><Brand tone="dark" /></div>
       <Stepper :step="step" />
-      <div class="rounded-[22px] bg-white p-5 shadow-[0_1px_3px_rgba(15,23,42,0.06)]">
+      <div class="rounded-[22px] bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
         <StepPhone v-if="step === 1" @next="step = 2" />
         <StepActivate v-else-if="step === 2" @next="step = 3" @back="step = 1" />
         <StepTest v-else @done="done" @back="step = 2" />

@@ -14,11 +14,10 @@ const barra: Record<string, string> = { normal: 'bg-success', atencao: 'bg-warn-
 <template>
   <button
     type="button"
-    class="flex w-full items-center gap-3 rounded-[16px] bg-white px-3.5 py-4 text-left shadow-[0_1px_3px_rgba(15,23,42,0.06)] active:bg-line-soft"
+    class="flex w-full items-center gap-3 rounded-[16px] bg-white px-3.5 py-4 text-left shadow-[0_1px_3px_rgba(0,0,0,0.06)] active:bg-line-soft"
     @click="router.push(`/evento/${props.item.code}`)"
   >
     <span class="w-1 shrink-0 self-stretch rounded-full" :class="barra[item.nivel]" />
-    <span class="w-[52px] shrink-0 text-center text-[14px] font-extrabold text-ink">{{ horaCurta(item.hora_brt) }}</span>
     <span class="min-w-0 flex-1">
       <span class="block text-[15px] font-bold leading-snug text-ink">{{ item.tipo.nome }}</span>
       <span class="mt-0.5 block text-[12px] font-semibold text-faint">{{ item.tipo.pais }} · {{ item.tipo.fonte }}</span>
@@ -26,6 +25,7 @@ const barra: Record<string, string> = { normal: 'bg-success', atencao: 'bg-warn-
         <span v-for="(f, i) in frases(item.tipo.impacto_texto)" :key="i" class="block text-[13.5px] leading-snug text-ink-3">{{ f }}</span>
       </span>
     </span>
-    <ChevronRight :size="18" class="shrink-0 text-faint" />
+    <span class="shrink-0 rounded-full bg-chip px-2.5 py-1 text-[13px] font-extrabold text-ink" :class="{ 'self-start': detalhe }">{{ horaCurta(item.hora_brt) }}</span>
+    <ChevronRight :size="18" class="-ml-1 shrink-0 text-faint" :class="{ 'mt-1 self-start': detalhe }" />
   </button>
 </template>
