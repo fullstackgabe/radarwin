@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useRadarStore } from '@/stores/radar'
 import { NIVEL_FRASE, NIVEL_EMOJI, NIVEL_LABEL } from '@/lib/catalogo'
 import { dataLonga, rotuloDia } from '@/lib/dias'
 import { isDemo } from '@/lib/config'
 import { frases } from '@/lib/format'
-import EventoRow from '@/components/EventoRow.vue'
+import EventoAccordion from '@/components/EventoAccordion.vue'
 import Spinner from '@/components/Spinner.vue'
 
 const radar = useRadarStore()
@@ -14,6 +14,18 @@ onMounted(() => {
 })
 
 const dia = computed(() => radar.hoje)
+
+const aberto = ref<string | null>(null)
+watch(
+  () => dia.value?.eventos,
+  (ev) => {
+    aberto.value = ev?.length === 1 ? ev[0]!.id : null
+  },
+  { immediate: true },
+)
+function alterna(id: string) {
+  aberto.value = aberto.value === id ? null : id
+}
 
 const tom: Record<string, string> = {
   normal: 'from-[#065f46] to-[#047857]',
@@ -35,25 +47,26 @@ const tom: Record<string, string> = {
     <p v-else-if="radar.error" class="py-10 text-center text-[14px] text-danger">{{ radar.error }}</p>
 
     <template v-else-if="dia">
-      <section class="rounded-[22px] bg-gradient-to-br px-5 py-7 text-center text-white shadow-[0_6px_18px_rgba(0,0,0,0.18)]" :class="tom[dia.nivel]">
-        <p v-if="rotuloDia(dia.data) !== 'Hoje'" class="text-[13px] font-semibold opacity-85">{{ rotuloDia(dia.data) }}</p>
-        <p class="text-[13px] font-semibold opacity-85">{{ dataLonga(dia.data) }}</p>
-        <p class="mt-4 text-[34px] leading-none">{{ NIVEL_EMOJI[dia.nivel] }}</p>
-        <p class="mt-2 text-[26px] font-extrabold leading-tight">{{ NIVEL_LABEL[dia.nivel] }}</p>
-        <div class="mx-auto mt-4 flex max-w-[300px] flex-col gap-0.5">
-          <p v-for="(f, i) in frases(NIVEL_FRASE[dia.nivel])" :key="i" class="text-[14.5px] leading-snug opacity-95">{{ f }}</p>
+      <section class="flex items-center gap-4 rounded-[20px] bg-gradient-to-br px-5 py-4 text-white shadow-[0_6px_18px_rgba(0,0,0,0.18)]" :class="tom[dia.nivel]">
+        <span class="shrink-0 text-[34px] leading-none">{{ NIVEL_EMOJI[dia.nivel] }}</span>
+        <div class="min-w-0 flex-1">
+          <p class="text-[12px] font-semibold opacity-85">
+            <template v-if="rotuloDia(dia.data) !== 'Hoje'">{{ rotuloDia(dia.data) }} · </template>{{ dataLonga(dia.data) }}
+          </p>
+          <p class="text-[22px] font-extrabold leading-tight">{{ NIVEL_LABEL[dia.nivel] }}</p>
+          <p class="mt-0.5 text-[13px] leading-snug opacity-95">{{ frases(NIVEL_FRASE[dia.nivel]).join(' ') }}</p>
         </div>
       </section>
 
-      <h2 class="mb-3 mt-7 px-1 text-center text-[13px] font-extrabold uppercase tracking-wide text-ink">Notícias do dia</h2>
-      <div v-if="dia.eventos.length" class="flex flex-col gap-3">
-        <EventoRow v-for="e in dia.eventos" :key="e.id" :item="e" detalhe />
+      <h2 class="mb-2.5 mt-5 px-1 text-center text-[13px] font-extrabold uppercase tracking-wide text-ink">Notícias do dia</h2>
+      <div v-if="dia.eventos.length" class="flex flex-col gap-2.5">
+        <EventoAccordion v-for="e in dia.eventos" :key="e.id" :item="e" :aberto="aberto === e.id" @toggle="alterna(e.id)" />
       </div>
       <p v-else class="rounded-[16px] bg-white px-4 py-5 text-center text-[14px] text-muted shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
         Nenhuma notícia relevante para a abertura hoje.
       </p>
 
-      <div class="mt-10 px-2 text-center">
+      <div class="mt-6 px-2 text-center">
         <p class="text-[10.5px] font-extrabold uppercase tracking-[0.12em] text-faint">Fontes oficiais</p>
         <p class="mx-auto mt-1.5 max-w-[300px] text-[12px] font-medium leading-relaxed text-faint">IBGE · Banco Central · B3 · Federal Reserve · BLS · BEA · Census Bureau · Banco Central Europeu</p>
       </div>
