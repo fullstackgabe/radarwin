@@ -28,6 +28,7 @@ export const useRadarStore = defineStore('radar', () => {
   )
 
   const hoje = computed(() => dias.value[0] ?? null)
+  const comNoticia = computed(() => dias.value.filter((d) => d.eventos.length))
 
   async function load() {
     loading.value = true
@@ -50,5 +51,5 @@ export const useRadarStore = defineStore('radar', () => {
     loaded.value = false
   }
 
-  return { tipos, eventos, loading, error, loaded, dias, hoje, tipoPorCode, load, reset }
+  return { tipos, eventos, loading, error, loaded, dias, comNoticia, hoje, tipoPorCode, load, reset }
 })
